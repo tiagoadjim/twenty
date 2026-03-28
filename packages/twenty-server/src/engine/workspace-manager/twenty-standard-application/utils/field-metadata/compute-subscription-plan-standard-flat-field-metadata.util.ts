@@ -1,0 +1,318 @@
+import { msg } from '@lingui/core/macro';
+import { i18nLabel } from 'src/engine/workspace-manager/twenty-standard-application/utils/i18n-label.util';
+import {
+  DateDisplayFormat,
+  FieldMetadataType,
+  RelationType,
+} from 'twenty-shared/types';
+
+import { type FlatFieldMetadata } from 'src/engine/metadata-modules/flat-field-metadata/types/flat-field-metadata.type';
+import { type AllStandardObjectFieldName } from 'src/engine/workspace-manager/twenty-standard-application/types/all-standard-object-field-name.type';
+import {
+  type CreateStandardFieldArgs,
+  createStandardFieldFlatMetadata,
+} from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/create-standard-field-flat-metadata.util';
+import { createStandardRelationFieldFlatMetadata } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/create-standard-relation-field-flat-metadata.util';
+import { getTsVectorColumnExpressionFromFields } from 'src/engine/workspace-manager/utils/get-ts-vector-column-expression.util';
+import { SEARCH_FIELDS_FOR_SUBSCRIPTION_PLAN } from 'src/modules/subscription-plan/standard-objects/subscription-plan.workspace-entity';
+
+export const buildSubscriptionPlanStandardFlatFieldMetadatas = ({
+  now,
+  objectName,
+  workspaceId,
+  standardObjectMetadataRelatedEntityIds,
+  dependencyFlatEntityMaps,
+  twentyStandardApplicationId,
+}: Omit<
+  CreateStandardFieldArgs<'subscriptionPlan', FieldMetadataType>,
+  'context'
+>): Record<AllStandardObjectFieldName<'subscriptionPlan'>, FlatFieldMetadata> => ({
+  // Base fields from BaseWorkspaceEntity
+  id: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'id',
+      type: FieldMetadataType.UUID,
+      label: i18nLabel(msg`Id`),
+      description: i18nLabel(msg`Id`),
+      icon: 'Icon123',
+      isSystem: true,
+      isNullable: false,
+      isUIReadOnly: true,
+      defaultValue: 'uuid',
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  createdAt: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'createdAt',
+      type: FieldMetadataType.DATE_TIME,
+      label: i18nLabel(msg`Creation date`),
+      description: i18nLabel(msg`Creation date`),
+      icon: 'IconCalendar',
+      isSystem: true,
+      isNullable: false,
+      isUIReadOnly: true,
+      defaultValue: 'now',
+      settings: {
+        displayFormat: DateDisplayFormat.RELATIVE,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  updatedAt: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'updatedAt',
+      type: FieldMetadataType.DATE_TIME,
+      label: i18nLabel(msg`Last update`),
+      description: i18nLabel(msg`Last time the record was changed`),
+      icon: 'IconCalendarClock',
+      isSystem: true,
+      isNullable: false,
+      isUIReadOnly: true,
+      defaultValue: 'now',
+      settings: {
+        displayFormat: DateDisplayFormat.RELATIVE,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  deletedAt: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'deletedAt',
+      type: FieldMetadataType.DATE_TIME,
+      label: i18nLabel(msg`Deleted at`),
+      description: i18nLabel(msg`Date when the record was deleted`),
+      icon: 'IconCalendarMinus',
+      isSystem: true,
+      isNullable: true,
+      isUIReadOnly: true,
+      settings: {
+        displayFormat: DateDisplayFormat.RELATIVE,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+
+  // SubscriptionPlan-specific fields
+  name: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'name',
+      type: FieldMetadataType.TEXT,
+      label: i18nLabel(msg`Name`),
+      description: i18nLabel(msg`The subscription plan name`),
+      icon: 'IconTag',
+      isNullable: true,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  price: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'price',
+      type: FieldMetadataType.CURRENCY,
+      label: i18nLabel(msg`Price`),
+      description: i18nLabel(msg`The subscription plan price`),
+      icon: 'IconCurrencyDollar',
+      isNullable: true,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  billingCycle: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'billingCycle',
+      type: FieldMetadataType.SELECT,
+      label: i18nLabel(msg`Billing Cycle`),
+      description: i18nLabel(msg`The billing cycle for the subscription plan`),
+      icon: 'IconRepeat',
+      isNullable: false,
+      defaultValue: "'MONTHLY'",
+      options: [
+        {
+          id: '59f75a2d-5299-43c8-aeef-812721ff0f35',
+          value: 'MONTHLY',
+          label: i18nLabel(msg`Monthly`),
+          position: 0,
+          color: 'blue',
+        },
+        {
+          id: '237f541d-c2c4-4c3e-8985-607ab8230f12',
+          value: 'QUARTERLY',
+          label: i18nLabel(msg`Quarterly`),
+          position: 1,
+          color: 'purple',
+        },
+        {
+          id: 'cf361575-1ba6-4ba4-aa8d-6bf312865eae',
+          value: 'ANNUAL',
+          label: i18nLabel(msg`Annual`),
+          position: 2,
+          color: 'green',
+        },
+      ],
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  description: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'description',
+      type: FieldMetadataType.TEXT,
+      label: i18nLabel(msg`Description`),
+      description: i18nLabel(msg`The subscription plan description`),
+      icon: 'IconNotes',
+      isNullable: true,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  position: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'position',
+      type: FieldMetadataType.POSITION,
+      label: i18nLabel(msg`Position`),
+      description: i18nLabel(msg`Subscription plan record position`),
+      icon: 'IconHierarchy2',
+      isSystem: true,
+      isNullable: false,
+      defaultValue: 0,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  createdBy: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'createdBy',
+      type: FieldMetadataType.ACTOR,
+      label: i18nLabel(msg`Created by`),
+      description: i18nLabel(msg`The creator of the record`),
+      icon: 'IconCreativeCommonsSa',
+      isSystem: true,
+      isUIReadOnly: true,
+      isNullable: false,
+      defaultValue: {
+        source: "'MANUAL'",
+        name: "'System'",
+        workspaceMemberId: null,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  updatedBy: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'updatedBy',
+      type: FieldMetadataType.ACTOR,
+      label: i18nLabel(msg`Updated by`),
+      description: i18nLabel(
+        msg`The workspace member who last updated the record`,
+      ),
+      icon: 'IconUserCircle',
+      isSystem: true,
+      isUIReadOnly: true,
+      isNullable: false,
+      defaultValue: {
+        source: "'MANUAL'",
+        name: "'System'",
+        workspaceMemberId: null,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  searchVector: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'searchVector',
+      type: FieldMetadataType.TS_VECTOR,
+      label: i18nLabel(msg`Search vector`),
+      description: i18nLabel(msg`Field used for full-text search`),
+      icon: 'IconUser',
+      isSystem: true,
+      isNullable: true,
+      settings: {
+        generatedType: 'STORED',
+        asExpression: getTsVectorColumnExpressionFromFields(
+          SEARCH_FIELDS_FOR_SUBSCRIPTION_PLAN,
+        ),
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+
+  // Relation fields
+  subscriptions: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'subscriptions',
+      label: i18nLabel(msg`Subscriptions`),
+      description: i18nLabel(msg`Subscriptions using this plan`),
+      icon: 'IconRepeat',
+      isNullable: true,
+      targetObjectName: 'subscription',
+      targetFieldName: 'subscriptionPlan',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+});

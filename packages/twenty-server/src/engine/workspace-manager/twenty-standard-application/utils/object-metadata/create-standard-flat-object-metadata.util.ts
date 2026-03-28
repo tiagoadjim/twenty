@@ -889,6 +889,65 @@ export const STANDARD_FLAT_OBJECT_METADATA_BUILDERS_BY_OBJECT_NAME = {
       twentyStandardApplicationId,
       now,
     }),
+  subscriptionPlan: ({
+    now,
+    workspaceId,
+    standardObjectMetadataRelatedEntityIds,
+    twentyStandardApplicationId,
+    dependencyFlatEntityMaps,
+  }: Omit<
+    CreateStandardObjectArgs<'subscriptionPlan'>,
+    'context' | 'objectName'
+  >) =>
+    createStandardObjectFlatMetadata({
+      objectName: 'subscriptionPlan',
+      dependencyFlatEntityMaps,
+      context: {
+        universalIdentifier:
+          STANDARD_OBJECTS.subscriptionPlan.universalIdentifier,
+        nameSingular: 'subscriptionPlan',
+        namePlural: 'subscriptionPlans',
+        labelSingular: i18nLabel(msg`Subscription Plan`),
+        labelPlural: i18nLabel(msg`Subscription Plans`),
+        description: i18nLabel(msg`A subscription plan`),
+        icon: 'IconFileDescription',
+        isSearchable: true,
+        labelIdentifierFieldMetadataName: 'name',
+      },
+      workspaceId,
+      standardObjectMetadataRelatedEntityIds,
+      twentyStandardApplicationId,
+      now,
+    }),
+  subscription: ({
+    now,
+    workspaceId,
+    standardObjectMetadataRelatedEntityIds,
+    twentyStandardApplicationId,
+    dependencyFlatEntityMaps,
+  }: Omit<
+    CreateStandardObjectArgs<'subscription'>,
+    'context' | 'objectName'
+  >) =>
+    createStandardObjectFlatMetadata({
+      objectName: 'subscription',
+      dependencyFlatEntityMaps,
+      context: {
+        universalIdentifier: STANDARD_OBJECTS.subscription.universalIdentifier,
+        nameSingular: 'subscription',
+        namePlural: 'subscriptions',
+        labelSingular: i18nLabel(msg`Subscription`),
+        labelPlural: i18nLabel(msg`Subscriptions`),
+        description: i18nLabel(msg`A subscription`),
+        icon: 'IconRepeat',
+        isSearchable: true,
+        labelIdentifierFieldMetadataName: 'status',
+      },
+      workspaceId,
+      standardObjectMetadataRelatedEntityIds,
+      twentyStandardApplicationId,
+      now,
+    }),
 } satisfies {
   [P in AllStandardObjectName]: (
     args: Omit<CreateStandardObjectArgs<P>, 'context' | 'objectName'>,

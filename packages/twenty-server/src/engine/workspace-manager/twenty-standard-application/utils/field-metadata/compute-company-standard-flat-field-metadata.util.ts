@@ -527,4 +527,26 @@ export const buildCompanyStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  subscriptions: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'subscriptions',
+      label: i18nLabel(msg`Subscriptions`),
+      description: i18nLabel(msg`Subscriptions linked to the company`),
+      icon: 'IconRepeat',
+      isNullable: true,
+      targetObjectName: 'subscription',
+      targetFieldName: 'company',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 });

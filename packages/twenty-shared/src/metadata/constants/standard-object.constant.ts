@@ -713,6 +713,9 @@ export const STANDARD_OBJECTS = {
       timelineActivities: {
         universalIdentifier: '20202020-0414-4daf-9c0d-64fe7b27f89f',
       },
+      subscriptions: {
+        universalIdentifier: 'ebcdc753-9cdf-4a74-9b9f-218e03e0b73c',
+      },
       searchVector: {
         universalIdentifier: '85c71601-72f9-4b7b-b343-d46100b2c74d',
       },
@@ -828,6 +831,9 @@ export const STANDARD_OBJECTS = {
           },
           timelineActivities: {
             universalIdentifier: '20202020-af01-4a01-8a01-c0aba11c121a',
+          },
+          subscriptions: {
+            universalIdentifier: '14ae8c4f-bb6d-43c2-a7e8-9e1f34d56789',
           },
         },
       },
@@ -2384,6 +2390,9 @@ export const STANDARD_OBJECTS = {
       timelineActivities: {
         universalIdentifier: '20202020-a43e-4873-9c23-e522de906ce5',
       },
+      subscriptions: {
+        universalIdentifier: 'bef2b6a0-8b02-415b-8933-44a9d208ba97',
+      },
       searchVector: {
         universalIdentifier: '57d1d7ad-fa10-44fc-82f3-ad0959ec2534',
       },
@@ -2511,6 +2520,9 @@ export const STANDARD_OBJECTS = {
           },
           timelineActivities: {
             universalIdentifier: '20202020-af02-4a02-8a02-ae0a1ea1221c',
+          },
+          subscriptions: {
+            universalIdentifier: '2f9b7d5e-cc3a-4e01-9f2b-8c4d1e56789a',
           },
         },
       },
@@ -3517,6 +3529,119 @@ export const STANDARD_OBJECTS = {
           assignedTasks: {
             universalIdentifier: 'af16226e-6375-4676-8bd9-9d1a57076fc4',
           },
+        },
+      },
+    },
+  },
+  subscriptionPlan: {
+    universalIdentifier: '91fe255f-aa2c-49a8-bb5e-e7b6cd5c6ffc',
+    fields: {
+      id: { universalIdentifier: 'fd26e891-efdf-489a-b220-e3a214c56023' },
+      createdAt: { universalIdentifier: '2eccb27b-0166-48f6-b69c-a327248f064e' },
+      updatedAt: { universalIdentifier: 'c5343d7b-ca9a-4741-836e-c9b738e8d96e' },
+      deletedAt: { universalIdentifier: 'e30dd5c8-ebe4-4a34-99bf-9a747fa94a62' },
+      position: { universalIdentifier: '395a78a6-3e87-4826-8935-26f043dc4b55' },
+      name: { universalIdentifier: '42854e3c-1946-4604-be7b-302e78a9753f' },
+      price: { universalIdentifier: 'ba06faf6-8661-4877-aa75-a0fa3145063c' },
+      billingCycle: { universalIdentifier: '58e65436-1041-4693-99a6-69174e368ba8' },
+      description: { universalIdentifier: '1155da7e-88ae-45fa-a89e-b2477b25e2d8' },
+      subscriptions: { universalIdentifier: '2e804e95-ab65-4520-89a3-7630e41c874a' },
+      createdBy: { universalIdentifier: '5bc9076d-1354-4563-9c0b-ba5edcfe0909' },
+      updatedBy: { universalIdentifier: '89ae7a90-c5e4-42ba-8d07-bcc387e3c6c0' },
+      searchVector: { universalIdentifier: 'e32b2448-6651-4134-87dd-e31ee5d39f4e' },
+    },
+    indexes: {
+      searchVectorGinIndex: {
+        universalIdentifier: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+      },
+    },
+    views: {
+      allSubscriptionPlans: {
+        universalIdentifier: '490720d7-4d63-4ad1-8dd7-ef9b1b19403c',
+        viewFields: {
+          name: { universalIdentifier: 'bcee5cfb-f480-4c77-9179-aa6227977831' },
+          price: { universalIdentifier: '0906cafd-ee34-44d9-8785-3887e012b280' },
+          billingCycle: { universalIdentifier: 'e3df13eb-1aa6-4aec-a509-b37e5339daf7' },
+          createdAt: { universalIdentifier: '11ca7f1c-147e-4361-b296-fe984692e435' },
+        },
+      },
+      subscriptionPlanRecordPageFields: {
+        universalIdentifier: 'd3dc63f1-d0dc-4e0b-8a03-e3f4fd3a5db1',
+        viewFieldGroups: {
+          general: { universalIdentifier: '0ed2181e-bb61-4efb-bb22-881cee24da07' },
+          other: { universalIdentifier: '30ce3d4a-0106-426e-aa5c-5ee52581022c' },
+        },
+        viewFields: {
+          name: { universalIdentifier: '44dd63b0-ca99-400d-9348-52465624cf2e' },
+          price: { universalIdentifier: 'b5fc484b-5780-4160-842c-a2490424f824' },
+          billingCycle: { universalIdentifier: '8303b00e-35cd-4170-b651-4c45fbbc6227' },
+          description: { universalIdentifier: '34748a6f-1cd1-4515-b42e-cb277f2d8020' },
+          createdAt: { universalIdentifier: 'b3048642-fddb-4598-a6ad-ed2c71e1a0c2' },
+          createdBy: { universalIdentifier: 'b225c680-daf0-4ecd-bcf5-5c21fce08034' },
+        },
+      },
+    },
+  },
+  subscription: {
+    universalIdentifier: '62491f21-0195-457e-a819-42ab7b361b3b',
+    fields: {
+      id: { universalIdentifier: 'c84102f0-f2d0-497e-a9b2-307ce9f8bc8f' },
+      createdAt: { universalIdentifier: '800bf63f-89be-4420-ba23-aebdd914c71a' },
+      updatedAt: { universalIdentifier: 'f46e40fe-bd8c-4f6c-9758-a05998ebe178' },
+      deletedAt: { universalIdentifier: '62506857-c1c7-4eaf-89b2-2e1fb0d99773' },
+      position: { universalIdentifier: 'e238f874-63c4-4047-8167-394e523ec2a8' },
+      status: { universalIdentifier: '6fe7b6fc-f665-485b-8e51-378e9a180cf2' },
+      startDate: { universalIdentifier: '06f9fa91-da91-4f8c-b605-27e2928abe92' },
+      renewalDate: { universalIdentifier: 'aa07e461-f918-4e11-badc-756b99f9b90f' },
+      priceOverride: { universalIdentifier: 'eb86c5c4-d044-4cfc-a522-96d797034ce2' },
+      notes: { universalIdentifier: 'a5d43e93-f0d2-4752-8f28-eab05b7ca305' },
+      subscriptionPlan: { universalIdentifier: '7bafc793-9861-4e7f-b2af-401592de408e' },
+      company: { universalIdentifier: 'e5946a3a-7de3-4df7-a011-bb49291cabd4' },
+      person: { universalIdentifier: '7c569fef-2409-4446-94d4-0d85eda1aecf' },
+      createdBy: { universalIdentifier: '13af376b-5b3a-4843-980f-411574693420' },
+      updatedBy: { universalIdentifier: 'a10f8b7f-8177-4c46-9126-c79392d6f7ca' },
+      searchVector: { universalIdentifier: 'fcc74c6d-b8fd-47dd-89e3-b36a054514f8' },
+    },
+    indexes: {
+      subscriptionPlanIdIndex: {
+        universalIdentifier: 'b1c2d3e4-f5a6-7890-bcde-fa1234567891',
+      },
+      companyIdIndex: {
+        universalIdentifier: 'c2d3e4f5-a6b7-8901-cdef-ab2345678901',
+      },
+      personIdIndex: {
+        universalIdentifier: 'd3e4f5a6-b7c8-9012-defa-bc3456789012',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: 'e4f5a6b7-c8d9-0123-efab-cd4567890123',
+      },
+    },
+    views: {
+      allSubscriptions: {
+        universalIdentifier: '4bfa45c9-eecf-4190-b97c-e37d4b123f8d',
+        viewFields: {
+          status: { universalIdentifier: 'e8582280-90ff-4617-921f-925fa2dbe54e' },
+          startDate: { universalIdentifier: 'fb9a741a-d7e9-425d-b815-e7e0580751b1' },
+          renewalDate: { universalIdentifier: '0b1990d7-3ee0-449c-b82f-f4be122608a0' },
+          subscriptionPlan: { universalIdentifier: '2204e136-e1f4-4e69-a864-b2504e3ea96b' },
+          createdAt: { universalIdentifier: 'ab11b30f-11a7-4672-88f0-776ccef95de9' },
+        },
+      },
+      subscriptionRecordPageFields: {
+        universalIdentifier: 'a3581e24-f48d-46e7-83de-ef5794c5c032',
+        viewFieldGroups: {
+          general: { universalIdentifier: 'a602af85-9b06-40f0-9c45-92db20866129' },
+          other: { universalIdentifier: '1ba50438-c414-4fc4-bf07-89836c1290c1' },
+        },
+        viewFields: {
+          status: { universalIdentifier: 'f0ed6209-9561-4750-a45e-232f3abda390' },
+          startDate: { universalIdentifier: 'd9c9a813-b5e0-46f5-b69c-ce602a4e9b40' },
+          renewalDate: { universalIdentifier: 'c2fb0275-e8fa-4794-912b-f8f0837af726' },
+          priceOverride: { universalIdentifier: '099c5e84-68dc-4047-822b-fd43a1bff48a' },
+          notes: { universalIdentifier: '490f937c-b239-497d-8853-89e091df5260' },
+          subscriptionPlan: { universalIdentifier: 'b40d4ba5-cb67-46dc-9ff4-db9e8ac1c613' },
+          createdAt: { universalIdentifier: '2be9a1dc-395e-42c8-a857-cccac10c6769' },
+          createdBy: { universalIdentifier: 'a2c7a649-353f-4522-a4d7-63e0c1de684d' },
         },
       },
     },

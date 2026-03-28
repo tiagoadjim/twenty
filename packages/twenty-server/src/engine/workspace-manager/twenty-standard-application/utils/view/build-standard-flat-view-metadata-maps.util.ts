@@ -35,6 +35,8 @@ import { computeStandardWorkflowRunViews } from 'src/engine/workspace-manager/tw
 import { computeStandardWorkflowVersionViews } from 'src/engine/workspace-manager/twenty-standard-application/utils/view/compute-standard-workflow-version-views.util';
 import { computeStandardWorkflowViews } from 'src/engine/workspace-manager/twenty-standard-application/utils/view/compute-standard-workflow-views.util';
 import { computeStandardWorkspaceMemberViews } from 'src/engine/workspace-manager/twenty-standard-application/utils/view/compute-standard-workspace-member-views.util';
+import { computeStandardSubscriptionPlanViews } from 'src/engine/workspace-manager/twenty-standard-application/utils/view/compute-standard-subscription-plan-views.util';
+import { computeStandardSubscriptionViews } from 'src/engine/workspace-manager/twenty-standard-application/utils/view/compute-standard-subscription-views.util';
 import { type CreateStandardViewArgs } from 'src/engine/workspace-manager/twenty-standard-application/utils/view/create-standard-view-flat-metadata.util';
 
 type StandardViewBuilder<P extends AllStandardObjectName> = (
@@ -75,6 +77,8 @@ const STANDARD_FLAT_VIEW_METADATA_BUILDERS_BY_OBJECT_NAME = {
   workflowRun: computeStandardWorkflowRunViews,
   workflowVersion: computeStandardWorkflowVersionViews,
   workspaceMember: computeStandardWorkspaceMemberViews,
+  subscriptionPlan: computeStandardSubscriptionPlanViews,
+  subscription: computeStandardSubscriptionViews,
 } as const satisfies {
   [P in AllStandardObjectName]?: StandardViewBuilder<P>;
 };
