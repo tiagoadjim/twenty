@@ -35,6 +35,10 @@ import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.ent
 import { PermissionsService } from 'src/engine/metadata-modules/permissions/permissions.service';
 import { WorkspaceCacheService } from 'src/engine/workspace-cache/services/workspace-cache.service';
 
+// Guard against LOGIN tokens where sub is an email instead of a UUID
+const UUID_REGEX =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 @Injectable()
 export class JwtAuthStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
@@ -144,6 +148,17 @@ export class JwtAuthStrategy extends PassportStrategy(Strategy, 'jwt') {
       throw new AuthException(
         'User not found',
         AuthExceptionCode.USER_NOT_FOUND,
+      );
+    }
+
+    // Guard against LOGIN tokens or any malformed token where sub is an email
+    // instead of a UUID — this can happen if a stale login token reaches a
+    // protected endpoint. Fail fast with a clear error instead of letting
+    // TypeORM crash with "invalid input syntax for type uuid".
+    if (!UUID_REGEX.test(userId)) {
+      throw new AuthException(
+        'Invalid token: user identifier is not a valid UUID',
+        AuthExceptionCode.UNAUTHENTICATED,
       );
     }
 
