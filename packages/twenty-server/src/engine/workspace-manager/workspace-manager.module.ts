@@ -22,8 +22,6 @@ import { DevSeederModule } from 'src/engine/workspace-manager/dev-seeder/dev-see
 import { TwentyStandardApplicationModule } from 'src/engine/workspace-manager/twenty-standard-application/twenty-standard-application.module';
 import { WorkspaceMigrationModule } from 'src/engine/workspace-manager/workspace-migration/workspace-migration.module';
 
-import { TwentyStandardApplicationService } from 'src/engine/workspace-manager/twenty-standard-application/services/twenty-standard-application.service';
-
 import { WorkspaceManagerService } from './workspace-manager.service';
 
 @Module({
@@ -50,7 +48,7 @@ import { WorkspaceManagerService } from './workspace-manager.service';
       LogicFunctionEntity,
     ]),
   ],
-  exports: [WorkspaceManagerService, TwentyStandardApplicationService],
+  exports: [WorkspaceManagerService, TwentyStandardApplicationModule],
   providers: [WorkspaceManagerService],
 })
 export class WorkspaceManagerModule {}
