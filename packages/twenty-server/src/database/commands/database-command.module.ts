@@ -7,6 +7,7 @@ import { ListOrphanedWorkspaceEntitiesCommand } from 'src/database/commands/list
 import { ConfirmationQuestion } from 'src/database/commands/questions/confirmation.question';
 import { WorkspaceExportModule } from 'src/database/commands/workspace-export/workspace-export.module';
 import { UpgradeVersionCommandModule } from 'src/database/commands/upgrade-version-command/upgrade-version-command.module';
+import { SyncStandardObjectsCommand } from 'src/engine/workspace-manager/workspace-migration/workspace-migration-runner/commands/sync-standard-objects.command';
 import { TypeORMModule } from 'src/database/typeorm/typeorm.module';
 import { ApiKeyModule } from 'src/engine/core-modules/api-key/api-key.module';
 import { GenerateApiKeyCommand } from 'src/engine/core-modules/api-key/commands/generate-api-key.command';
@@ -76,6 +77,7 @@ import { AutomatedTriggerModule } from 'src/modules/workflow/workflow-trigger/au
     ListOrphanedWorkspaceEntitiesCommand,
     EnterpriseKeyValidationCronCommand,
     GenerateApiKeyCommand,
+    SyncStandardObjectsCommand,
   ],
 })
 export class DatabaseCommandModule {}
