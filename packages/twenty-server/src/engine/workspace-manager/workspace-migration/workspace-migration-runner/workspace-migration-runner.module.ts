@@ -12,6 +12,8 @@ import { WorkspaceCacheStorageModule } from 'src/engine/workspace-cache-storage/
 import { WorkspaceCacheModule } from 'src/engine/workspace-cache/workspace-cache.module';
 import { WorkspaceSchemaMigrationRunnerActionHandlersModule } from 'src/engine/workspace-manager/workspace-migration/workspace-migration-runner/action-handlers/workspace-schema-migration-runner-action-handlers.module';
 import { FlatCacheInvalidateCommand } from 'src/engine/workspace-manager/workspace-migration/workspace-migration-runner/commands/flat-cache-invalidate.command';
+import { SyncStandardObjectsCommand } from 'src/engine/workspace-manager/workspace-migration/workspace-migration-runner/commands/sync-standard-objects.command';
+import { TwentyStandardApplicationModule } from 'src/engine/workspace-manager/twenty-standard-application/twenty-standard-application.module';
 import { WorkspaceMigrationRunnerActionHandlerRegistryService } from 'src/engine/workspace-manager/workspace-migration/workspace-migration-runner/registry/workspace-migration-runner-action-handler-registry.service';
 import { WorkspaceMigrationRunnerService } from 'src/engine/workspace-manager/workspace-migration/workspace-migration-runner/services/workspace-migration-runner.service';
 
@@ -27,11 +29,13 @@ import { WorkspaceMigrationRunnerService } from 'src/engine/workspace-manager/wo
     WorkspaceCacheStorageModule,
     WorkspaceCacheModule,
     TypeOrmModule.forFeature([WorkspaceEntity]),
+    TwentyStandardApplicationModule,
   ],
   providers: [
     WorkspaceMigrationRunnerService,
     WorkspaceMigrationRunnerActionHandlerRegistryService,
     FlatCacheInvalidateCommand,
+    SyncStandardObjectsCommand,
   ],
   exports: [WorkspaceMigrationRunnerService],
 })
